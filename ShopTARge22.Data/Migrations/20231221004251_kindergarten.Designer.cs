@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopTARge22.Data;
 
@@ -11,9 +12,10 @@ using ShopTARge22.Data;
 namespace ShopTARge22.Data.Migrations
 {
     [DbContext(typeof(ShopTARge22Context))]
-    partial class ShopTARge22ContextModelSnapshot : ModelSnapshot
+    [Migration("20231221004251_kindergarten")]
+    partial class kindergarten
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
