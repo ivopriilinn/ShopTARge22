@@ -6,7 +6,6 @@ using ShopTARge22.Models.AccuWeatherForecasts;
 
 namespace ShopTARge22.Controllers
 {
-    [Authorize]
     public class AccuWeatherForecastsController : Controller
     {
         private readonly IAccuWeatherForecastsServices _accuWeatherForecastsServices;
