@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShopTARge22.Core.DTO.AccuWeatherDTOs;
 using ShopTARge22.Core.ServiceInterface;
 using ShopTARge22.Models.AccuWeatherForecasts;
+using System.Diagnostics;
 
 namespace ShopTARge22.Controllers
 {
@@ -25,6 +26,7 @@ namespace ShopTARge22.Controllers
         [HttpPost]
         public IActionResult SearchCity(AccuWeatherSearchCityViewModel vm)
         {
+            Debug.WriteLine("SearchCity: vm.City=" + vm.City);
             if (ModelState.IsValid) 
             {
                 return RedirectToAction("City", "AccuWeatherForecasts", new { city = vm.City});
@@ -36,6 +38,7 @@ namespace ShopTARge22.Controllers
         [HttpGet]
         public async Task<IActionResult> City(string city)
         {
+            Debug.WriteLine("City: city=" + city);
             AccuWeatherResultDTO dto = new();
             AccuWeatherLocationResultDTO dtoLocation = new();
 

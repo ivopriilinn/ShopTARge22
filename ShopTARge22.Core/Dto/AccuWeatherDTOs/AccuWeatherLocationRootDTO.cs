@@ -173,8 +173,8 @@ namespace ShopTARge22.Core.DTO.AccuWeatherDTOs
         [JsonPropertyName("isDaylightSaving")]
         public bool IsDaylightSaving { get; set; }
 
-        [JsonPropertyName("nextOffsetChange")]
-        public DateTime NextOffsetChange { get; set; }
+        //[JsonPropertyName("nextOffsetChange")]
+        //public DateTime? NextOffsetChange { get; set; }
     }
 }
 

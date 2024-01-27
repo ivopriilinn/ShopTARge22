@@ -7,6 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Nancy;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARge22.ApplicationServices.Services
 {
@@ -17,7 +20,7 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<AccuWeatherLocationResultDTO> AccuWeatherGet(AccuWeatherLocationResultDTO dtoLocation)
         {
-
+            Debug.WriteLine("AccuWeatherGet: City=" + dtoLocation.City);
             try
             {
                 var url1 = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={API_Key}&q={dtoLocation.City}";
@@ -25,6 +28,9 @@ namespace ShopTARge22.ApplicationServices.Services
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(url1);
+                    Debug.WriteLine("AccuWeatherGet: json=" + json);
+                    //string json2 = File.ReadAllText("C:\\Users\\ivopr\\Desktop\\Kool\\Sooritamisel ained\\Programmeerimine\\ShopTARge22KT\\ShopTARge22KT\\ShopTARge22.ApplicationServices\\Services\\TestJsonData.json");
+                    //Debug.WriteLine("AccuWeatherGet: json2=" + json2);
                     List<AccuWeatherLocationRootDTO> accuGet = new JavaScriptSerializer().Deserialize<List<AccuWeatherLocationRootDTO>>(json);
 
 
@@ -50,7 +56,11 @@ namespace ShopTARge22.ApplicationServices.Services
 
         public async Task<AccuWeatherResultDTO> AccuWeatherResult(AccuWeatherResultDTO dto, AccuWeatherLocationResultDTO dtoLocation)
         {
+            Debug.WriteLine("AccuWeatherResult: City=" + dtoLocation.City);
+
             await AccuWeatherGet(dtoLocation);
+
+            Debug.WriteLine("AccuWeatherResult: Key=" + dtoLocation.Key);
 
             if (!string.IsNullOrEmpty(dtoLocation.Key))
             {
@@ -59,6 +69,7 @@ namespace ShopTARge22.ApplicationServices.Services
                 using (WebClient client = new WebClient())
                 {
                     string json = client.DownloadString(url);
+                    Debug.WriteLine("AccuWeatherResult: json=" + json);
                     List<AccuWeatherRootDTO> accuResult = new JavaScriptSerializer().Deserialize<List<AccuWeatherRootDTO>>(json);
                         
                         dto.Temperature = accuResult[0].Temperature.Metric.Value;
